@@ -6,6 +6,10 @@
 
 package sklep;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author si
@@ -29,18 +33,28 @@ public class Pdodaj extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        FindButton = new javax.swing.JButton();
+        dodajPracownika = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        nazwiskoPrField = new javax.swing.JTextField();
+        imiePrField = new javax.swing.JTextField();
+        miastoPrField = new javax.swing.JTextField();
+        ulicaPrField = new javax.swing.JTextField();
+        nr_lokaluPrField = new javax.swing.JTextField();
+        kod_pocztowyPrField = new javax.swing.JTextField();
+        telefonPrField = new javax.swing.JTextField();
+        wyplataPrField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        FindButton.setText("Dodaj");
+        dodajPracownika.setText("Dodaj");
+        dodajPracownika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dodajPracownikaActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Anuluj");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -55,28 +69,38 @@ public class Pdodaj extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(FindButton)
+                .addComponent(dodajPracownika)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FindButton)
+                    .addComponent(dodajPracownika)
                     .addComponent(jButton2))
                 .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jTextField1.setText("id pracownika");
+        nazwiskoPrField.setText("nazwisko");
 
-        jTextField2.setText("data odbioru");
+        imiePrField.setText("imie");
 
-        jTextField3.setText("sposób odbioru");
+        miastoPrField.setText("miasto");
+
+        ulicaPrField.setText("ulica");
+
+        nr_lokaluPrField.setText("nr lokalu");
+
+        kod_pocztowyPrField.setText("kod pocztowy");
+
+        telefonPrField.setText("telefon");
+
+        wyplataPrField.setText("wyplata");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -85,20 +109,35 @@ public class Pdodaj extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1))
+                    .addComponent(imiePrField)
+                    .addComponent(nazwiskoPrField)
+                    .addComponent(miastoPrField)
+                    .addComponent(ulicaPrField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nr_lokaluPrField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(kod_pocztowyPrField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(telefonPrField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(wyplataPrField, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(40, 40, 40))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(nazwiskoPrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imiePrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(miastoPrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ulicaPrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nr_lokaluPrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kod_pocztowyPrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(telefonPrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(wyplataPrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -116,9 +155,9 @@ public class Pdodaj extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -130,6 +169,19 @@ public class Pdodaj extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void dodajPracownikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dodajPracownikaActionPerformed
+        // TODO add your handling code here:
+        String sql = "INSERT INTO PRACOWNICY VALUES (IdPSEQ.NEXTVAL,"+"'"+nazwiskoPrField.getText()+"'"+", '"+imiePrField.getText()+"'"+","
+                + " '"+miastoPrField.getText()+"'"+", '"+ulicaPrField.getText()+"'"+",' "+nr_lokaluPrField.getText()+"'"+", '"
+                +kod_pocztowyPrField.getText()+"'"+", "+telefonPrField.getText()+","+wyplataPrField.getText()+")";
+        try{
+            Connect.update(sql, Sklep.pracownicyTable);
+            Connect.refresh("Select * from Pracownicy", Sklep.pracownicyTable);
+        }catch (SQLException | ClassNotFoundException ex){
+            Logger.getLogger(Tdodaj.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_dodajPracownikaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,12 +219,17 @@ public class Pdodaj extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton FindButton;
+    private javax.swing.JButton dodajPracownika;
+    private javax.swing.JTextField imiePrField;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField kod_pocztowyPrField;
+    private javax.swing.JTextField miastoPrField;
+    private javax.swing.JTextField nazwiskoPrField;
+    private javax.swing.JTextField nr_lokaluPrField;
+    private javax.swing.JTextField telefonPrField;
+    private javax.swing.JTextField ulicaPrField;
+    private javax.swing.JTextField wyplataPrField;
     // End of variables declaration//GEN-END:variables
 }
