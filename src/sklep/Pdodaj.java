@@ -72,7 +72,7 @@ public class Pdodaj extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jTextField1.setText("nr klienta");
+        jTextField1.setText("id pracownika");
 
         jTextField2.setText("data odbioru");
 

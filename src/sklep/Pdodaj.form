@@ -136,7 +136,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="jTextField1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="nr klienta"/>
+            <Property name="text" type="java.lang.String" value="id pracownika"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField2">

@@ -456,6 +456,11 @@ public class Sklep extends javax.swing.JFrame {
     private void dodajTransakcjeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dodajTransakcjeMouseClicked
         // TODO add your handling code here:
         TRdodaj oknoTransakcji = new TRdodaj();
+        try {
+            Connect.refresh("SELECT * FROM Szczegoly_transakcji", TRdodaj.szczegolyTransakcjiTable);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Sklep.class.getName()).log(Level.SEVERE, null, ex);
+        }
         oknoTransakcji.setVisible(true);
     }//GEN-LAST:event_dodajTransakcjeMouseClicked
 

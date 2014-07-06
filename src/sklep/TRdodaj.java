@@ -30,8 +30,8 @@ public class TRdodaj extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         IdKlientaField = new javax.swing.JTextField();
-        ImieField = new javax.swing.JTextField();
-        DataZamówieniaField = new javax.swing.JTextField();
+        IdPracownikaField = new javax.swing.JTextField();
+        DataZamowieniaField = new javax.swing.JTextField();
         DatOdbioruField = new javax.swing.JTextField();
         SposobOdbioruField = new javax.swing.JTextField();
         RabatField = new javax.swing.JTextField();
@@ -44,14 +44,14 @@ public class TRdodaj extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         StatusField = new javax.swing.JTextField();
-        KlientaDodaj = new javax.swing.JButton();
+        dodajTransakcje = new javax.swing.JButton();
         Towar_Anuluj = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        szczegolyTransakcjiTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -61,14 +61,14 @@ public class TRdodaj extends javax.swing.JFrame {
 
         IdKlientaField.setText("Id klienta");
 
-        ImieField.setText("Id pracownika");
-        ImieField.addMouseListener(new java.awt.event.MouseAdapter() {
+        IdPracownikaField.setText("Id pracownika");
+        IdPracownikaField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ImieFieldMouseClicked(evt);
+                IdPracownikaFieldMouseClicked(evt);
             }
         });
 
-        DataZamówieniaField.setText("Data zamówienia");
+        DataZamowieniaField.setText("Data zamówienia");
 
         DatOdbioruField.setText("Data odbioru");
 
@@ -115,8 +115,8 @@ public class TRdodaj extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(IdKlientaField)
-                            .addComponent(ImieField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DataZamówieniaField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(IdPracownikaField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(DataZamowieniaField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(DatOdbioruField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(SposobOdbioruField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(RabatField)
@@ -134,11 +134,11 @@ public class TRdodaj extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ImieField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IdPracownikaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DataZamówieniaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DataZamowieniaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -159,7 +159,12 @@ public class TRdodaj extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        KlientaDodaj.setText("Dodaj transakcję do bazy");
+        dodajTransakcje.setText("Dodaj transakcję do bazy");
+        dodajTransakcje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dodajTransakcjeActionPerformed(evt);
+            }
+        });
 
         Towar_Anuluj.setText("Anuluj");
         Towar_Anuluj.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -176,7 +181,7 @@ public class TRdodaj extends javax.swing.JFrame {
 
         jButton2.setText("Usuń pozycję");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        szczegolyTransakcjiTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -187,7 +192,7 @@ public class TRdodaj extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(szczegolyTransakcjiTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -195,13 +200,13 @@ public class TRdodaj extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -226,13 +231,13 @@ public class TRdodaj extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(KlientaDodaj)
+                        .addComponent(dodajTransakcje)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Towar_Anuluj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +249,7 @@ public class TRdodaj extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(KlientaDodaj)
+                            .addComponent(dodajTransakcje)
                             .addComponent(Towar_Anuluj))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -262,9 +267,24 @@ public class TRdodaj extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_Towar_AnulujMouseClicked
 
-    private void ImieFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImieFieldMouseClicked
+    private void IdPracownikaFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IdPracownikaFieldMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_ImieFieldMouseClicked
+    }//GEN-LAST:event_IdPracownikaFieldMouseClicked
+
+    private void dodajTransakcjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dodajTransakcjeActionPerformed
+        // TODO add your handling code here:
+        String idKlienta = IdKlientaField.getText();
+        String idPracownika = IdPracownikaField.getText();
+        String dataZamowienia = DataZamowieniaField.getText();
+        String dataOdbioru = DatOdbioruField.getText();
+        String rabat = RabatField.getText();
+        String status = StatusField.getText();
+        
+        String sql = "INSERT INTO transakcje(Nr_transakcji, Id_klienta, Id_pracownika, Data_zamowienia, Data_odbioru, "
+               +"Sposob_odbioru, Sposob_zaplaty, Rabat, Status) VALUES "
+               +"IdTRSEQ.NEXTVAL,"+"'"+ idKlienta+"'"+","+idPracownika+"'"+","+dataZamowienia+"'"+","+dataOdbioru+"'"+","+rabat
+               +"'"+","+status+" )";
+    }//GEN-LAST:event_dodajTransakcjeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,14 +323,14 @@ public class TRdodaj extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DatOdbioruField;
-    private javax.swing.JTextField DataZamówieniaField;
+    private javax.swing.JTextField DataZamowieniaField;
     private javax.swing.JTextField IdKlientaField;
-    private javax.swing.JTextField ImieField;
-    private javax.swing.JButton KlientaDodaj;
+    private javax.swing.JTextField IdPracownikaField;
     private javax.swing.JTextField RabatField;
     private javax.swing.JTextField SposobOdbioruField;
     private javax.swing.JTextField StatusField;
     private javax.swing.JButton Towar_Anuluj;
+    private javax.swing.JButton dodajTransakcje;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -325,6 +345,6 @@ public class TRdodaj extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable szczegolyTransakcjiTable;
     // End of variables declaration//GEN-END:variables
 }
