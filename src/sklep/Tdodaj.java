@@ -159,9 +159,7 @@ public class Tdodaj extends javax.swing.JFrame {
         try {
             Connect.update(sql, Sklep.towaryTable);
             Connect.refresh("Select * from Towary", Sklep.towaryTable);
-        } catch (SQLException ex) {
-            Logger.getLogger(Tdodaj.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Tdodaj.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Towar_DodajActionPerformed
