@@ -55,6 +55,7 @@ public class TRdodaj extends javax.swing.JFrame {
         dataZamowieniajXDatePicker = new org.jdesktop.swingx.JXDatePicker();
         jLabel10 = new javax.swing.JLabel();
         sposobZaplatyCB = new javax.swing.JComboBox();
+        dodajKlientaLabel = new java.awt.Label();
         dodajTransakcje = new javax.swing.JButton();
         Towar_Anuluj = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -105,6 +106,13 @@ public class TRdodaj extends javax.swing.JFrame {
 
         sposobZaplatyCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Przedpłata", "Za pobraniem" }));
 
+        dodajKlientaLabel.setText("+");
+        dodajKlientaLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dodajKlientaLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -121,12 +129,15 @@ public class TRdodaj extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel3)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(dodajKlientaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -149,9 +160,11 @@ public class TRdodaj extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IdKlientaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(IdKlientaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1))
+                    .addComponent(dodajKlientaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IdPracownikaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,6 +332,13 @@ public class TRdodaj extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dodajTransakcjeActionPerformed
 
+    private void dodajKlientaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dodajKlientaLabelMouseClicked
+        // TODO add your handling code here:
+        TRoptions = 1;
+        Kdodaj dodajKlienta = new Kdodaj();
+        dodajKlienta.setVisible(true);
+    }//GEN-LAST:event_dodajKlientaLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -362,6 +382,7 @@ public class TRdodaj extends javax.swing.JFrame {
     private javax.swing.JButton Towar_Anuluj;
     private org.jdesktop.swingx.JXDatePicker dataOdbiorujXDatePicker;
     private org.jdesktop.swingx.JXDatePicker dataZamowieniajXDatePicker;
+    private java.awt.Label dodajKlientaLabel;
     private javax.swing.JButton dodajTransakcje;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -382,4 +403,5 @@ public class TRdodaj extends javax.swing.JFrame {
     private javax.swing.JComboBox sposobZaplatyCB;
     public static javax.swing.JTable szczegolyTransakcjiTable;
     // End of variables declaration//GEN-END:variables
+    public static int TRoptions = 0;
 }

@@ -69,13 +69,7 @@ public class Connect {
             table.setModel(DTModel);
         }catch(SQLException ex){
             Logger.getLogger(Sklep.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        
-       
-          
+        }      
     }
  
     
