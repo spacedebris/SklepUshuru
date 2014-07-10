@@ -34,11 +34,10 @@ public class Connect {
         
         return changed;
     }
-    public static int find(String sql, JTable table) throws SQLException{
-        int changed = stmt.executeUpdate(sql);
-        JOptionPane.showMessageDialog(null, "Znaleziono "+changed+" elementy");
-        
-        return changed;
+    public static String find(String sql, JTable table) throws SQLException{
+        ResultSet rs = stmt.executeQuery(sql);
+        rs.next();
+        return Integer.toString(rs.getInt(1));
     }
     
     public static void refresh(String sql, JTable table)throws ClassNotFoundException{

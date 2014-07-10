@@ -375,7 +375,7 @@ public class TRdodaj extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField IdKlientaField;
+    public static javax.swing.JTextField IdKlientaField;
     private javax.swing.JTextField IdPracownikaField;
     private javax.swing.JTextField RabatField;
     private javax.swing.JTextField StatusField;

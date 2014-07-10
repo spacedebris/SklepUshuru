@@ -173,22 +173,22 @@ public class Kdodaj extends javax.swing.JFrame {
 
     private void KlientaDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KlientaDodajActionPerformed
         // TODO add your handling code here:
-        String nazwisko = NazwiskoField.getText();
-        String imie = ImieField.getText();
-        String miasto = MiastoField.getText();
-        String ulica = UlicaField.getText();
-        String nr_lokalu = Nr_lokaluField.getText();
-        String kod = KodField.getText();
-        String tel = TelefonField.getText();
-        String sql = "INSERT INTO Klienci VALUES (IdTOseq.NEXTVAL,'"+nazwisko+"','"+imie+"','"+miasto+"','"
-                +ulica+"','"+nr_lokalu+"','"+kod+"',"+tel+")";
-        System.out.println(sql);
+        String sql = "INSERT INTO Klienci VALUES (IdTOseq.NEXTVAL,'"+NazwiskoField.getText()
+                +"','"+ImieField.getText()
+                +"','"+MiastoField.getText()
+                +"','"
+                +UlicaField.getText()
+                +"','"+Nr_lokaluField.getText()
+                +"','"+KodField.getText()
+                +"',"+TelefonField.getText()+")";
+        
         try {
             Connect.update(sql, Sklep.klienciTable);
             Connect.refresh("Select * from Klienci", Sklep.klienciTable);
             System.out.println(TRdodaj.TRoptions);
             if(TRdodaj.TRoptions == 1){
-                System.out.println(Connect.find("SELECT Id_klienta FROM Klienci WHERE rowid IN (Select MAX (ROWID) FROM Klienci)", Sklep.klienciTable));
+                TRdodaj.IdKlientaField.setText(Connect.find("SELECT Id_klienta FROM Klienci WHERE rowid IN "
+                        + "(Select MAX (ROWID) FROM Klienci)",Sklep.klienciTable));
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Tdodaj.class.getName()).log(Level.SEVERE, null, ex);
