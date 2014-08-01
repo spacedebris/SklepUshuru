@@ -8,6 +8,7 @@ package sklep;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,7 +35,24 @@ public class Connect {
         
         return changed;
     }
-    public static String find(String sql, JTable table) throws SQLException{
+    
+    public static void finder(String sql, JTable table){
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                String add1 = rs.getString("id_towaru");
+                System.out.println(add1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    public static String findKID(String sql, JTable table) throws SQLException{
         ResultSet rs = stmt.executeQuery(sql);
         rs.next();
         return Integer.toString(rs.getInt(1));

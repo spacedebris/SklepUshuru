@@ -193,9 +193,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                           <Component id="dodajTowar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
-                          <Component id="wyszukajTowar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="271" max="-2" attributes="0"/>
                           <Component id="wyszukajTowarArea" min="-2" pref="298" max="-2" attributes="0"/>
                           <EmptySpace pref="19" max="32767" attributes="0"/>
                       </Group>
@@ -207,7 +205,6 @@
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="dodajTowar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="wyszukajTowar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="wyszukajTowarArea" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="29" max="32767" attributes="0"/>
@@ -225,15 +222,10 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dodajTowarActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="wyszukajTowar">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Wyszukaj"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="wyszukajTowarActionPerformed"/>
-                  </Events>
-                </Component>
                 <Component class="javax.swing.JTextField" name="wyszukajTowarArea">
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="wyszukajTowarAreaKeyReleased"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
