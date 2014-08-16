@@ -6,6 +6,7 @@
 
 package sklep;
 
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +51,11 @@ public class log extends javax.swing.JFrame {
         passwdField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwdFieldFocusGained(evt);
+            }
+        });
+        passwdField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwdFieldKeyPressed(evt);
             }
         });
 
@@ -165,6 +171,18 @@ public class log extends javax.swing.JFrame {
         // TODO add your handling code here:
         passwdField.setText("");
     }//GEN-LAST:event_passwdFieldFocusGained
+
+    private void passwdFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwdFieldKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            try {
+            // TODO add your handling code here:
+            Connect.connecting();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(log.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_passwdFieldKeyPressed
 
     /**
      * @param args the command line arguments

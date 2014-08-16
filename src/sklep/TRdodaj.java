@@ -6,6 +6,7 @@
 
 package sklep;
 
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -71,16 +72,22 @@ public class TRdodaj extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        IdKlientaField.setText("Id klienta");
+        IdKlientaField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IdKlientaFieldKeyTyped(evt);
+            }
+        });
 
-        IdPracownikaField.setText("Id pracownika");
         IdPracownikaField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 IdPracownikaFieldMouseClicked(evt);
             }
         });
-
-        RabatField.setText("Rabat");
+        IdPracownikaField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IdPracownikaFieldKeyTyped(evt);
+            }
+        });
 
         jLabel1.setText("ID klienta");
 
@@ -97,8 +104,6 @@ public class TRdodaj extends javax.swing.JFrame {
         jLabel7.setText("DANE TRANSAKCJI");
 
         jLabel8.setText("Status");
-
-        StatusField.setText("Status");
 
         sposobOdbioruCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Przesyłka kurierska", "Przesyłka pobraniowa", "Paczkomat", "Odbiór Osobisty" }));
 
@@ -338,6 +343,22 @@ public class TRdodaj extends javax.swing.JFrame {
         Kdodaj dodajKlienta = new Kdodaj();
         dodajKlienta.setVisible(true);
     }//GEN-LAST:event_dodajKlientaLabelMouseClicked
+
+    private void IdKlientaFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdKlientaFieldKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)){
+           evt.consume();
+        }
+    }//GEN-LAST:event_IdKlientaFieldKeyTyped
+
+    private void IdPracownikaFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdPracownikaFieldKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)){
+           evt.consume();
+        }
+    }//GEN-LAST:event_IdPracownikaFieldKeyTyped
 
     /**
      * @param args the command line arguments

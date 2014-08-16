@@ -58,7 +58,7 @@ public class Sklep extends javax.swing.JFrame {
         pracownicyTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         dodajFakture = new javax.swing.JButton();
-        wyszukajFakture = new javax.swing.JButton();
+        wyszukajPracownika = new javax.swing.JButton();
         wyszukajPracownikaArea = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -181,7 +181,12 @@ public class Sklep extends javax.swing.JFrame {
             }
         });
 
-        wyszukajFakture.setText("Wyszukaj");
+        wyszukajPracownika.setText("Wyszukaj");
+        wyszukajPracownika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wyszukajPracownikaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -191,7 +196,7 @@ public class Sklep extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addComponent(dodajFakture)
                 .addGap(148, 148, 148)
-                .addComponent(wyszukajFakture)
+                .addComponent(wyszukajPracownika)
                 .addGap(42, 42, 42)
                 .addComponent(wyszukajPracownikaArea, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -202,7 +207,7 @@ public class Sklep extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dodajFakture)
-                    .addComponent(wyszukajFakture)
+                    .addComponent(wyszukajPracownika)
                     .addComponent(wyszukajPracownikaArea, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -502,6 +507,11 @@ public class Sklep extends javax.swing.JFrame {
             Connect.finder("Select * from Towary where id_towaru = ?", towaryTable);
     }//GEN-LAST:event_wyszukajTowarAreaKeyReleased
 
+    private void wyszukajPracownikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wyszukajPracownikaActionPerformed
+        // TODO add your handling code here:
+        Connect.finder(wyszukajPracownikaArea.getText(), pracownicyTable);
+    }//GEN-LAST:event_wyszukajPracownikaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -565,9 +575,9 @@ public class Sklep extends javax.swing.JFrame {
     public static javax.swing.JTable pracownicyTable;
     public static javax.swing.JTable towaryTable;
     public static javax.swing.JTable transakcjeTable;
-    private javax.swing.JButton wyszukajFakture;
     private javax.swing.JButton wyszukajKlienta;
     private javax.swing.JTextField wyszukajKlientaArea;
+    private javax.swing.JButton wyszukajPracownika;
     private javax.swing.JTextField wyszukajPracownikaArea;
     private javax.swing.JTextField wyszukajTowarArea;
     private javax.swing.JButton wyszukajTransakcje;
