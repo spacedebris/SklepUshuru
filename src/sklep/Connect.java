@@ -51,7 +51,8 @@ public class Connect {
         rs.next();
         return Integer.toString(rs.getInt(1));
     }
-     
+    
+    
     public static void refresh(String sql, JTable table)throws ClassNotFoundException{
 
         try{

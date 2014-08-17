@@ -67,6 +67,7 @@ public class TRdodaj extends javax.swing.JFrame {
         szczegolyTransakcjiTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Dodaj transakcje");
         setAlwaysOnTop(true);
         setName("Dodaj Transakcje"); // NOI18N
 
@@ -86,6 +87,12 @@ public class TRdodaj extends javax.swing.JFrame {
         IdPracownikaField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 IdPracownikaFieldKeyTyped(evt);
+            }
+        });
+
+        RabatField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                RabatFieldKeyTyped(evt);
             }
         });
 
@@ -359,6 +366,14 @@ public class TRdodaj extends javax.swing.JFrame {
            evt.consume();
         }
     }//GEN-LAST:event_IdPracownikaFieldKeyTyped
+
+    private void RabatFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RabatFieldKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if(!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)){
+           evt.consume();
+        }
+    }//GEN-LAST:event_RabatFieldKeyTyped
 
     /**
      * @param args the command line arguments

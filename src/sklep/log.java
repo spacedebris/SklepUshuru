@@ -151,9 +151,7 @@ public class log extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             Connect.connecting();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(log.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(log.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_okButtonActionPerformed

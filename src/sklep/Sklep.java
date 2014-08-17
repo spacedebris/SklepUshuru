@@ -76,11 +76,11 @@ public class Sklep extends javax.swing.JFrame {
         wyszukajTransakcjeArea = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
-        adminItem = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SklepUshuru");
         setBackground(new java.awt.Color(153, 255, 153));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -396,20 +396,6 @@ public class Sklep extends javax.swing.JFrame {
 
         jMenu2.setText("Opcje");
 
-        adminItem.setText("Admin");
-        adminItem.setName("adminItem"); // NOI18N
-        adminItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                adminItemMouseClicked(evt);
-            }
-        });
-        adminItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminItemActionPerformed(evt);
-            }
-        });
-        jMenu2.add(adminItem);
-
         jMenuItem1.setText("Zakończ");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -445,14 +431,6 @@ public class Sklep extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void adminItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminItemMouseClicked
-        // TODO add your handling code here:
-        //fileChooser wybierzOkno = new fileChooser();
-        //wybierzOkno.setVisible(true);
-        TRdodaj oknoTransakcji = new TRdodaj();
-        oknoTransakcji.setVisible(true);
-    }//GEN-LAST:event_adminItemMouseClicked
-
     private void dodajTransakcjeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dodajTransakcjeMouseClicked
         // TODO add your handling code here:
         TRdodaj oknoTransakcji = new TRdodaj();
@@ -487,20 +465,10 @@ public class Sklep extends javax.swing.JFrame {
 
     }//GEN-LAST:event_dodajTowarMouseClicked
 
-    private void adminItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminItemActionPerformed
-        // TODO add your handling code here:
-        Admin okno = new Admin();
-        okno.setVisible(true);
-    }//GEN-LAST:event_adminItemActionPerformed
-
     private void dodajKlientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dodajKlientaActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_dodajKlientaActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void wyszukajTowarAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wyszukajTowarAreaKeyReleased
         // TODO add your handling code here:
@@ -511,6 +479,10 @@ public class Sklep extends javax.swing.JFrame {
         // TODO add your handling code here:
         Connect.finder(wyszukajPracownikaArea.getText(), pracownicyTable);
     }//GEN-LAST:event_wyszukajPracownikaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -549,7 +521,6 @@ public class Sklep extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem adminItem;
     private javax.swing.JButton dodajFakture;
     private javax.swing.JButton dodajKlienta;
     private javax.swing.JButton dodajTowar;
