@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package sklep;
 
 import java.sql.Connection;
@@ -21,7 +15,7 @@ import static sklep.log.passwdField;
 
 /**
  *
- * @author Ushuru
+ * @author si
  */
 public class Connect {
     static Statement stmt;
@@ -40,10 +34,10 @@ public class Connect {
             for(int j = 0; j < table.getColumnCount(); j++){
             if(table.getValueAt(i, j).equals(field)){
                 table.addRowSelectionInterval(i, j);
+                table.changeSelection(i, j, true, false);
             }
         }
         }
-        
     }
     
      public static String findKID(String sql, JTable table) throws SQLException{
