@@ -128,6 +128,11 @@ public class TRdodaj extends javax.swing.JFrame {
         });
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search-icon.png"))); // NOI18N
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -353,14 +358,12 @@ public class TRdodaj extends javax.swing.JFrame {
     }//GEN-LAST:event_dodajTransakcjeActionPerformed
 
     private void dodajKlientaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dodajKlientaLabelMouseClicked
-        // TODO add your handling code here:
         TRoptions = 1;
         Kdodaj dodajKlienta = new Kdodaj();
         dodajKlienta.setVisible(true);
     }//GEN-LAST:event_dodajKlientaLabelMouseClicked
 
     private void IdKlientaFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdKlientaFieldKeyTyped
-        // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)){
            evt.consume();
@@ -368,7 +371,6 @@ public class TRdodaj extends javax.swing.JFrame {
     }//GEN-LAST:event_IdKlientaFieldKeyTyped
 
     private void IdPracownikaFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdPracownikaFieldKeyTyped
-        // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)){
            evt.consume();
@@ -376,13 +378,22 @@ public class TRdodaj extends javax.swing.JFrame {
     }//GEN-LAST:event_IdPracownikaFieldKeyTyped
 
     private void RabatFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RabatFieldKeyTyped
-        // TODO add your handling code here:
         char c = evt.getKeyChar();
         if(!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)){
            evt.consume();
         }
     }//GEN-LAST:event_RabatFieldKeyTyped
 
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        znajdzKlientaWindow.setVisible(true);
+        znajdzKlientaWindow.setAlwaysOnTop(true);
+        try {
+            Connect.refresh("select * from klienci", Kznajdz.zKlientaTable);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TRdodaj.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel11MouseClicked
+    
     /**
      * @param args the command line arguments
      */
@@ -449,4 +460,5 @@ public class TRdodaj extends javax.swing.JFrame {
     public static javax.swing.JTable szczegolyTransakcjiTable;
     // End of variables declaration//GEN-END:variables
     public static int TRoptions = 0;
+    public static Kznajdz znajdzKlientaWindow = new Kznajdz();
 }

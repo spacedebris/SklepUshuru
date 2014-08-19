@@ -498,7 +498,7 @@ public class Sklep extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     /**
      * przeszukiwanie jtable
-     * @param evt 
+     * @param evt KeyEvent
      */
     private void wyszukajPracownikaAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wyszukajPracownikaAreaKeyReleased
         
