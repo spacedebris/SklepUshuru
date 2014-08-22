@@ -185,7 +185,7 @@ public class Kdodaj extends javax.swing.JFrame {
         try {
             Connect.update(sql, Sklep.klienciTable);
             Connect.refresh("Select * from Klienci", Sklep.klienciTable);
-            System.out.println(TRdodaj.TRoptions);
+            //System.out.println(TRdodaj.TRoptions);
             if(TRdodaj.TRoptions == 1){
                 TRdodaj.IdKlientaField.setText(Connect.findKID("SELECT Id_klienta FROM Klienci WHERE rowid IN "
                         + "(Select MAX (ROWID) FROM Klienci)",Sklep.klienciTable));

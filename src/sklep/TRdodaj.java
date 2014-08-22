@@ -240,6 +240,11 @@ public class TRdodaj extends javax.swing.JFrame {
         jLabel9.setText("SZCZEGÓŁY TRANSAKCJI");
 
         jButton1.setText("Dodaj pozycję");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Usuń pozycję");
 
@@ -393,6 +398,18 @@ public class TRdodaj extends javax.swing.JFrame {
             Logger.getLogger(TRdodaj.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        POZdodaj POZdodajWindow = new POZdodaj();
+        try {
+            Connect.refresh("SELECT * FROM Towary", POZdodaj.towaryTable);
+            Connect.refresh("SELECT * FROM Szczegoly_transakcji", POZdodaj.szczegolyTable);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TRdodaj.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        POZdodajWindow.setAlwaysOnTop(true);
+        POZdodajWindow.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * @param args the command line arguments
