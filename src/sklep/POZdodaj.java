@@ -125,7 +125,7 @@ public class POZdodaj extends javax.swing.JFrame {
                     +ilosc+", "+SidTowaru+")";
             try {
                 Connect.update(sql, POZdodaj.szczegolyTable);
-                Connect.refresh("SELECT * FROM Szczegoly_transakcji WHERE nr_transakcji = (SELECT MAX(nr_transakcji) FROM szczegoly_transakcji"
+                Connect.refresh("SELECT * FROM Szczegoly_transakcji WHERE nr_transakcji = (SELECT MAX(nr_transakcji) FROM szczegoly_transakcji)"
                         , POZdodaj.szczegolyTable);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(POZdodaj.class.getName()).log(Level.SEVERE, null, ex);
