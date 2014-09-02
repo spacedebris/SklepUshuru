@@ -38,8 +38,10 @@ public class POZdodaj extends javax.swing.JFrame {
         towaryTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         szczegolyTable = new javax.swing.JTable();
+        dodajPOZdodajButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Koszyk");
         setName("Koszyk"); // NOI18N
         setResizable(false);
 
@@ -73,8 +75,11 @@ public class POZdodaj extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        szczegolyTable.setName("Koszyk"); // NOI18N
         szczegolyTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(szczegolyTable);
+
+        dodajPOZdodajButton.setText("Dodaj zamówienie");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,15 +91,23 @@ public class POZdodaj extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dodajPOZdodajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dodajPOZdodajButton)
+                .addGap(4, 4, 4))
         );
 
         pack();
@@ -108,26 +121,17 @@ public class POZdodaj extends javax.swing.JFrame {
             System.out.println(SidTowaru);
             String ilosc = JOptionPane.showInputDialog(rootPane, "podaj ilość:",1);
             String sql = "INSERT INTO szczegoly_transakcji VALUES "
-                    +"(IdSseq.NEXTVAL, IdTRseq.NEXTVAL,"
+                    +"(IdSseq.NEXTVAL, IdTRseq.CURRVAL,"
                     +ilosc+", "+SidTowaru+")";
-            
-            try {
-                String idTR = Connect.findKID("SELECT Nr_transakcji FROM Transakcje WHERE rowid IN "
-                        + "(Select MAX (ROWID) FROM Transakcje)",Sklep.transakcjeTable);
-                System.out.println(idTR);
-            } catch (SQLException ex) {
-                Logger.getLogger(POZdodaj.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
             try {
                 Connect.update(sql, POZdodaj.szczegolyTable);
-                Connect.refresh("Select * from Transakcje", POZdodaj.szczegolyTable);
-            } catch (SQLException | ClassNotFoundException ex) {
+                Connect.refresh("SELECT * FROM Szczegoly_transakcji WHERE nr_transakcji = (SELECT MAX(nr_transakcji) FROM szczegoly_transakcji"
+                        , POZdodaj.szczegolyTable);
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(POZdodaj.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println(sql);
         }
-            
     }//GEN-LAST:event_towaryTableMouseClicked
 
     /**
@@ -166,6 +170,7 @@ public class POZdodaj extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton dodajPOZdodajButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable szczegolyTable;

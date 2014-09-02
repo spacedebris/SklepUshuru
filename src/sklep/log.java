@@ -47,7 +47,6 @@ public class log extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        passwdField.setText("password");
         passwdField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwdFieldFocusGained(evt);
@@ -68,7 +67,6 @@ public class log extends javax.swing.JFrame {
 
         jLabel1.setText("Nazwa użytkownika");
 
-        loginField.setText("Nazwa użytkownika");
         loginField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 loginFieldFocusGained(evt);
@@ -151,6 +149,7 @@ public class log extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             Connect.connecting();
+            this.setVisible(false);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(log.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -174,8 +173,8 @@ public class log extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             try {
-            // TODO add your handling code here:
             Connect.connecting();
+            this.setVisible(false);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(log.class.getName()).log(Level.SEVERE, null, ex);
         }

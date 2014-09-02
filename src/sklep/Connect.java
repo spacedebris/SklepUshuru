@@ -24,8 +24,8 @@ public class Connect {
     
     public static int update(String sql, JTable table) throws SQLException{
         int changed = stmt.executeUpdate(sql);
-        JOptionPane.showMessageDialog(null, "Dodano "+changed+" element.");
-        
+        //JOptionPane.showMessageDialog(null, "Dodano "+changed+" element.");
+        System.out.println("dodano "+changed+ " element.");
         return changed;
     }
     
