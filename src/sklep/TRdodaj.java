@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -60,7 +61,6 @@ public class TRdodaj extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         szczegolyTransakcjiTable = new javax.swing.JTable();
 
@@ -229,14 +229,12 @@ public class TRdodaj extends javax.swing.JFrame {
 
         jLabel9.setText("SZCZEGÓŁY TRANSAKCJI");
 
-        jButton1.setText("Dodaj pozycję");
+        jButton1.setText("Dodaj produkty");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jButton2.setText("Usuń pozycję");
 
         szczegolyTransakcjiTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -259,10 +257,7 @@ public class TRdodaj extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
+                    .addComponent(jButton1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -274,9 +269,7 @@ public class TRdodaj extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -332,6 +325,7 @@ public class TRdodaj extends javax.swing.JFrame {
         try{
             Connect.update(sql, Sklep.transakcjeTable);
             Connect.refresh("Select * from Transakcje", Sklep.transakcjeTable);
+            JOptionPane.showMessageDialog(rootPane, "Utworzono transkacje,, dodaj teraz produkty");
         }catch (SQLException | ClassNotFoundException ex){
             Logger.getLogger(Tdodaj.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -378,7 +372,7 @@ public class TRdodaj extends javax.swing.JFrame {
         POZdodaj POZdodajWindow = new POZdodaj();
         try {
             Connect.refresh("SELECT * FROM Towary", POZdodaj.towaryTable);
-            Connect.refresh("SELECT * FROM Szczegoly_transakcji WHERE nr_transakcji = (SELECT MAX(nr_transakcji) FROM szczegoly_transakcji"
+            Connect.refresh("SELECT * FROM Szczegoly_transakcji WHERE nr_transakcji = (SELECT MAX(nr_transakcji) FROM szczegoly_transakcji)"
                     , POZdodaj.szczegolyTable);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TRdodaj.class.getName()).log(Level.SEVERE, null, ex);
@@ -432,7 +426,6 @@ public class TRdodaj extends javax.swing.JFrame {
     private java.awt.Label dodajKlientaLabel;
     private javax.swing.JButton dodajTransakcje;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -39,6 +39,7 @@ public class POZdodaj extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         szczegolyTable = new javax.swing.JTable();
         dodajPOZdodajButton = new javax.swing.JButton();
+        anulujButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Koszyk");
@@ -77,9 +78,26 @@ public class POZdodaj extends javax.swing.JFrame {
         ));
         szczegolyTable.setName("Koszyk"); // NOI18N
         szczegolyTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        szczegolyTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                szczegolyTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(szczegolyTable);
 
         dodajPOZdodajButton.setText("Dodaj zamówienie");
+        dodajPOZdodajButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dodajPOZdodajButtonActionPerformed(evt);
+            }
+        });
+
+        anulujButton.setText("Anuluj");
+        anulujButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anulujButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,12 +107,13 @@ public class POZdodaj extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dodajPOZdodajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(anulujButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(dodajPOZdodajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +125,9 @@ public class POZdodaj extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dodajPOZdodajButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dodajPOZdodajButton)
+                    .addComponent(anulujButton))
                 .addGap(4, 4, 4))
         );
 
@@ -133,6 +154,48 @@ public class POZdodaj extends javax.swing.JFrame {
             System.out.println(sql);
         }
     }//GEN-LAST:event_towaryTableMouseClicked
+
+    private void dodajPOZdodajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dodajPOZdodajButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        JOptionPane.showMessageDialog(rootPane, "Dodano zamówienie");
+        
+    }//GEN-LAST:event_dodajPOZdodajButtonActionPerformed
+
+    private void anulujButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anulujButtonActionPerformed
+        // TODO add your handling code here:
+        String sql = "DELETE from szczegoly_transakcji where nr_transakcji=(select max(nr_transakcji) from szczegoly_transakcji)";
+        try {
+            Connect.update(sql, POZdodaj.szczegolyTable);
+            this.setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(POZdodaj.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_anulujButtonActionPerformed
+
+    private void szczegolyTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_szczegolyTableMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 1){
+            POZdodaj.szczegolyTable = (JTable)evt.getSource();
+            Object idTowaru = (Object)POZdodaj.szczegolyTable.getValueAt(POZdodaj.szczegolyTable.getSelectedRow(),0);
+            String SidTowaru = idTowaru.toString();
+            System.out.println(SidTowaru);
+            int dialogResult = JOptionPane.showConfirmDialog(rootPane, "Czy chcesz usunąć wybrany produkt");
+            if(dialogResult == JOptionPane.YES_OPTION){
+                String sql = "DELETE FROM szczegoly_transakcji WHERE id_szczegolu = " + SidTowaru;
+                System.out.println(sql);
+                try {
+                    Connect.update(sql, POZdodaj.szczegolyTable);
+                    Connect.refresh("SELECT * FROM szczegoly_transakcji where nr_transakcji="
+                            + "(select max(nr_transakcji) from szczegoly_transakcji)", szczegolyTable);
+                } catch (SQLException ex) {
+                    Logger.getLogger(POZdodaj.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(POZdodaj.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_szczegolyTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -170,6 +233,7 @@ public class POZdodaj extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton anulujButton;
     private javax.swing.JButton dodajPOZdodajButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

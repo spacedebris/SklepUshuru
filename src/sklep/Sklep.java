@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -342,6 +343,11 @@ public class Sklep extends javax.swing.JFrame {
                 "Nr_transakcji", "Id_klienta", "Id_pracownika", "Data_zamówienia", "Data_odbioru", "Sposób_odbioru"
             }
         ));
+        transakcjeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                transakcjeTableMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(transakcjeTable);
         if (transakcjeTable.getColumnModel().getColumnCount() > 0) {
             transakcjeTable.getColumnModel().getColumn(0).setHeaderValue("Nr_transakcji");
@@ -450,8 +456,8 @@ public class Sklep extends javax.swing.JFrame {
 
     private void dodajTransakcjeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dodajTransakcjeMouseClicked
         // TODO add your handling code here:
-        TRdodaj oknoTransakcji = new TRdodaj();
         
+        TRdodaj oknoTransakcji = new TRdodaj();
         oknoTransakcji.setVisible(true);
     }//GEN-LAST:event_dodajTransakcjeMouseClicked
 
@@ -515,6 +521,25 @@ public class Sklep extends javax.swing.JFrame {
         sorter.setRowFilter(RowFilter.regexFilter("(?i)"+wyszukajTransakcjeArea.getText()));
     }//GEN-LAST:event_wyszukajTransakcjeAreaKeyReleased
 
+    private void transakcjeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transakcjeTableMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 1){
+            TRdodaj podgladTR = new TRdodaj();
+            podgladTR.setVisible(true);
+            Sklep.transakcjeTable = (JTable)evt.getSource();
+            Object nr_transakcji = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(),0);
+            Object id_klienta = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 1);
+            Object id_pracownika = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 2);
+            Object data_zamowienia = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 3);
+            Object data_odbioru = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 4);
+            Object sposob_odbioru = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 5);
+            Object sposob_zaplaty = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 6);
+            Object rabat = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 7);
+            Object status = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 8);
+            podgladTR.IdKlientaField.setText(id_klienta.toString());
+        }
+    }//GEN-LAST:event_transakcjeTableMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -541,11 +566,13 @@ public class Sklep extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Sklep.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Sklep().setVisible(true);
+                
                 
             }
         });
