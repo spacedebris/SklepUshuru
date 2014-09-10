@@ -6,16 +6,15 @@
 
 package sklep;
 
-import java.math.BigDecimal;
-import java.sql.SQLException;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import static sklep.Connect.stmt;
 
 /**
  *
@@ -38,7 +37,6 @@ public class Sklep extends javax.swing.JFrame {
         }catch (ClassNotFoundException ex){
             Logger.getLogger(Sklep.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     /**
@@ -430,6 +428,16 @@ public class Sklep extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Pomoc");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -456,7 +464,6 @@ public class Sklep extends javax.swing.JFrame {
 
     private void dodajTransakcjeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dodajTransakcjeMouseClicked
         // TODO add your handling code here:
-        
         TRdodaj oknoTransakcji = new TRdodaj();
         oknoTransakcji.setVisible(true);
     }//GEN-LAST:event_dodajTransakcjeMouseClicked
@@ -524,10 +531,11 @@ public class Sklep extends javax.swing.JFrame {
     private void transakcjeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transakcjeTableMouseClicked
         // TODO add your handling code here:
         if(evt.getClickCount() == 1){
-            TRdodaj podgladTR = new TRdodaj();
-            podgladTR.setVisible(true);
+            TRpodglad podgladTR = new TRpodglad();
+            
             Sklep.transakcjeTable = (JTable)evt.getSource();
             Object nr_transakcji = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(),0);
+            String Snr_transakcji = nr_transakcji.toString();
             Object id_klienta = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 1);
             Object id_pracownika = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 2);
             Object data_zamowienia = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 3);
@@ -537,9 +545,58 @@ public class Sklep extends javax.swing.JFrame {
             Object rabat = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 7);
             Object status = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 8);
             podgladTR.IdKlientaField.setText(id_klienta.toString());
+            podgladTR.IdPracownikaField.setText(id_pracownika.toString());
+            podgladTR.dataZamowieniaField.setText(data_zamowienia.toString());
+            podgladTR.dataOdbioruField.setText(data_odbioru.toString());
+            podgladTR.sposobOdbioruField.setText(sposob_odbioru.toString());
+            podgladTR.sposobZaplatyField.setText(sposob_zaplaty.toString());
+            podgladTR.RabatField.setText(rabat.toString());
+            podgladTR.StatusField.setText(status.toString());
+            
+            try {
+                Connect.refresh("SELECT * FROM Szczegoly_transakcji WHERE nr_transakcji = "+ Snr_transakcji
+                        , podgladTR.szczegolyTransakcjiTable);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Sklep.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            podgladTR.setVisible(true);
         }
     }//GEN-LAST:event_transakcjeTableMouseClicked
 
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+        Runtime rt = Runtime.getRuntime();
+        String file = "C:\\Users\\Ushuru\\Documents\\NetBeansProjects\\SklepUshuru\\src\\Instrukcja.pdf";
+        try {
+            Process p = rt.exec("foxit reader" +file);
+            System.out.println("file");
+        } catch (IOException ex) {
+            Logger.getLogger(Sklep.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        // TODO add your handling code here:
+        
+        String filepath = "C:/Users/Ushuru/Documents/NetBeansProjects/SklepUshuru/src/Instrukcja.pdf";
+        File file = new File(filepath);
+    if (file.toString().endsWith(".pdf")) 
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file);
+        } catch (IOException ex) {
+            Logger.getLogger(Sklep.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    else {
+        Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.open(file);
+            } catch (IOException ex) {
+                Logger.getLogger(Sklep.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    }//GEN-LAST:event_jMenu3MouseClicked
+    
     /**
      * @param args the command line arguments
      */

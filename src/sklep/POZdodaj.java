@@ -85,7 +85,7 @@ public class POZdodaj extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(szczegolyTable);
 
-        dodajPOZdodajButton.setText("Dodaj zamówienie");
+        dodajPOZdodajButton.setText("OK");
         dodajPOZdodajButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dodajPOZdodajButtonActionPerformed(evt);
@@ -159,6 +159,12 @@ public class POZdodaj extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         JOptionPane.showMessageDialog(rootPane, "Dodano zamówienie");
+        try {
+            Connect.refresh("SELECT * FROM Szczegoly_transakcji WHERE nr_transakcji = (SELECT MAX(nr_transakcji) FROM szczegoly_transakcji)",
+                    TRdodaj.szczegolyTransakcjiTable);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(POZdodaj.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_dodajPOZdodajButtonActionPerformed
 
