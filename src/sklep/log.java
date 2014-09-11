@@ -6,6 +6,7 @@
 
 package sklep;
 
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,10 +47,14 @@ public class log extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        passwdField.setText("password");
         passwdField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 passwdFieldFocusGained(evt);
+            }
+        });
+        passwdField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwdFieldKeyPressed(evt);
             }
         });
 
@@ -62,7 +67,6 @@ public class log extends javax.swing.JFrame {
 
         jLabel1.setText("Nazwa użytkownika");
 
-        loginField.setText("Nazwa użytkownika");
         loginField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 loginFieldFocusGained(evt);
@@ -145,9 +149,8 @@ public class log extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             Connect.connecting();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(log.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            this.setVisible(false);
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(log.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_okButtonActionPerformed
@@ -165,6 +168,18 @@ public class log extends javax.swing.JFrame {
         // TODO add your handling code here:
         passwdField.setText("");
     }//GEN-LAST:event_passwdFieldFocusGained
+
+    private void passwdFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwdFieldKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            try {
+            Connect.connecting();
+            this.setVisible(false);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(log.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    }//GEN-LAST:event_passwdFieldKeyPressed
 
     /**
      * @param args the command line arguments

@@ -107,11 +107,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JPasswordField" name="passwdField">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="password"/>
-          </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="passwdFieldFocusGained"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passwdFieldKeyPressed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -131,9 +129,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="loginField">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nazwa u&#x17c;ytkownika"/>
-          </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="loginFieldFocusGained"/>
           </Events>
