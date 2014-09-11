@@ -535,7 +535,7 @@ public class Sklep extends javax.swing.JFrame {
             
             Sklep.transakcjeTable = (JTable)evt.getSource();
             Object nr_transakcji = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(),0);
-            String Snr_transakcji = nr_transakcji.toString();
+            Snr_transakcji = nr_transakcji.toString();
             Object id_klienta = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 1);
             Object id_pracownika = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 2);
             Object data_zamowienia = (Object)Sklep.transakcjeTable.getValueAt(Sklep.transakcjeTable.getSelectedRow(), 3);
@@ -577,8 +577,7 @@ public class Sklep extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-        // TODO add your handling code here:
-        
+
         String filepath = "C:/Users/Ushuru/Documents/NetBeansProjects/SklepUshuru/src/Instrukcja.pdf";
         File file = new File(filepath);
     if (file.toString().endsWith(".pdf")) 
@@ -634,7 +633,7 @@ public class Sklep extends javax.swing.JFrame {
             }
         });
     }
-
+    public static String Snr_transakcji;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton dodajFakture;
     private javax.swing.JButton dodajKlienta;

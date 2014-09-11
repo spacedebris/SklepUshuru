@@ -7,8 +7,10 @@
 package sklep;
 
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -103,6 +105,12 @@ public class TRpodglad extends javax.swing.JFrame {
         jLabel7.setText("DANE TRANSAKCJI");
 
         jLabel8.setText("Status");
+
+        StatusField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                StatusFieldKeyPressed(evt);
+            }
+        });
 
         jLabel10.setText("Sposób zaplaty");
 
@@ -310,6 +318,23 @@ public class TRpodglad extends javax.swing.JFrame {
             Logger.getLogger(TRpodglad.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void StatusFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StatusFieldKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            
+            System.out.println(Sklep.Snr_transakcji);
+            String sql = "UPDATE transakcje set status = '"+StatusField.getText()+"' WHERE nr_transakcji = "+Sklep.Snr_transakcji;
+            try {
+                Connect.update(sql, Sklep.transakcjeTable);
+                Connect.refresh("Select * from transakcje", Sklep.transakcjeTable);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(TRpodglad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(rootPane, "Zmieniono status transakcji");
+            
+        }
+    }//GEN-LAST:event_StatusFieldKeyPressed
     
     /**
      * @param args the command line arguments
